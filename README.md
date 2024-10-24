@@ -111,7 +111,7 @@ This project is a minimal prototype for an audio-based Q&A assistant designed to
 - **UI Improvements**: Though UI is minimal in this version, adding features such as real-time visual feedback during transcription or improving layout design would be future goals.
 
 ## Demo
-- To see the app in action, check out this [Loom Video](https://www.loom.com/share/bc60c0e495a4462691183375f7fb784d?sid=4c2e2394-7b1d-44c8-bd5e-2dd7a1e023e7).
+- To see the project walkthrough, check out this [Loom Video](https://www.loom.com/share/bc60c0e495a4462691183375f7fb784d?sid=4c2e2394-7b1d-44c8-bd5e-2dd7a1e023e7).
 
 ## Conclusion
 This project demonstrates the core logic of a real-time audio Q&A assistant. With improvements, it could become a robust tool for real-time customer support, healthcare Q&A, or even educational purposes.
