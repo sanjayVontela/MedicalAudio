@@ -1,6 +1,6 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
+
 import { getFunctions } from "firebase/functions";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -8,7 +8,7 @@ import { getFunctions } from "firebase/functions";
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: "AIzaSyBxkf4DCQJ-ufkRWOZTlvYyRcJ9t1qXNKs",
+  apiKey: "API-KEY",
   authDomain: "medical-audio-9c000.firebaseapp.com",
   projectId: "medical-audio-9c000",
   storageBucket: "medical-audio-9c000.appspot.com",

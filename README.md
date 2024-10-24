@@ -1,70 +1,117 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Medical Audio Assistant: Real-Time Logic
 
-## Available Scripts
+## Project Overview
 
-In the project directory, you can run:
+This project is a minimal prototype for an audio-based Q&A assistant designed to:
+1. Capture audio from a simulated conversation.
+2. Transcribe the audio to text in real time.
+3. Identify questions in the transcription.
+4. Suggest answers based on predefined documents.
 
-### `npm start`
+## Tech Stack
+- **Frontend**: React.js 
+- **Backend**: Firebase 
+- **AI Model**: Gemini AI  for question answering
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Features
+1. **Speech-to-Text**: Transcribes spoken words into text using the Web Speech API.
+2. **Question Detection**: Detects questions in the transcribed text and checks for medical relevance.
+3. **Answer Suggestion**: Suggests answers based on the provided question using Firebase cloud functions.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Installation
 
-### `npm test`
+### Prerequisites
+- Node.js installed on your machine
+- Firebase account and project set up
+- Gemini AI API key (or another AI service if preferred)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Steps to Set Up the Project
 
-### `npm run build`
+1. **Clone the repository**:
+    ```bash
+    git clone https://github.com/sanjayVontela/MedicalAudio.git
+    cd MedicalAudio
+    ```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+2. **Install dependencies**:
+    ```bash
+    npm install
+    ```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+3. **Firebase Setup**:
+    - In the project directory, create a Firebase project.
+    - Initialize Firebase functions:
+      ```bash
+      firebase init functions
+      ```
+    - Install necessary Firebase functions dependencies:
+      ```bash
+      cd functions
+      npm install
+      ```
+    - Configure the cloud function in `functions/index.js` to call Gemini AI or your chosen AI service. Ensure you include your API key.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+4. **Environment Variables**:
+    - Ensure to store sensitive keys (such as OpenAI API keys) in Firebase config or in `.env` files for local use. Avoid committing them to the repository.
 
-### `npm run eject`
+5. **Run the Application**:
+    ```bash
+    npm start
+    ```
+    This will start the development server on `localhost:3000`.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+6. **Deploy Firebase Functions**:
+    ```bash
+    firebase deploy --only functions
+    ```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## How to Use
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+1. **Speech Recognition**: 
+   - Open the application.
+   - Click the "Start" button to begin recording your speech.
+   - Speak naturally, and the app will transcribe your speech into text.
+   - Click "Stop" when you're done speaking.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+2. **Question Detection**: 
+   - The system will analyze the transcribed text and detect whether it contains any questions.
+   - If it detects a question, it will classify whether the question is medically related.
 
-## Learn More
+3. **Answer Suggestion**: 
+   - If a valid question is found, it is sent to the backend (Firebase functions) to retrieve a suggested answer from an AI service (OpenAI, etc.).
+   - The suggested answer will be displayed below the question.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Code Explanation
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- **AppStart Component**:
+  - Handles the overall flow of the app, including managing states for transcription, questions, and answers.
+  - Initiates the transcription process and triggers question detection once the user finishes speaking.
 
-### Code Splitting
+- **SpeechToText Component**:
+  - Uses the `react-speech-recognition` package to handle browser-based speech-to-text functionality.
+  - Provides the ability to start and stop listening, and manages the transcription output.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+- **analyzeQuestions.js**:
+  - Contains the logic for detecting questions within the transcribed text.
+  - Checks for medical relevance by matching the text against a list of medical terms.
 
-### Analyzing the Bundle Size
+- **AnswerService.js**:
+  - Calls Firebase functions to interact with the AI service.
+  - Processes the returned answers and formats them for display.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## Error Handling
+- **Transcription Issues**: If the browser doesn't support speech recognition, it will notify the user via an error message.
+- **Question Detection Failures**: If no valid question is detected, the user is informed (e.g., "No Question Found" or "No Medical Question").
+- **Backend Errors**: If there's an issue fetching answers, the user will receive an error message like "Sorry, there was an error processing your question."
 
-### Making a Progressive Web App
+## Future Enhancements
+- **Improved Question Detection**: Further refine the question detection logic to handle more complex sentence structures.
+- **Extended Domain Knowledge**: Currently, the model focuses on medical questions. Extend support to other domains by adding more comprehensive document datasets.
+- **UI Improvements**: Though UI is minimal in this version, adding features such as real-time visual feedback during transcription or improving layout design would be future goals.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+## Demo
+- To see the app in action, check out this [Loom Video](https://www.loom.com/share/bc60c0e495a4462691183375f7fb784d?sid=4c2e2394-7b1d-44c8-bd5e-2dd7a1e023e7).
 
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Conclusion
+This project demonstrates the core logic of a real-time audio Q&A assistant. With improvements, it could become a robust tool for real-time customer support, healthcare Q&A, or even educational purposes.
