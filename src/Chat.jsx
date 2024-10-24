@@ -9,7 +9,7 @@ function Chat() {
   const handleSendMessage = async () => {
     try {
       // Replace 'YOUR_API_KEY' with your actual API key
-      const genAI = new GoogleGenerativeAI('AIzaSyBgZeLeo5dYpX7M7Gh5UjGwv812bM0582E');
+      const genAI = new GoogleGenerativeAI('your-api-key');
 
       const model = genAI.getGenerativeModel({ model: "gemini-pro" });
       const result = await model.generateContent(message );
